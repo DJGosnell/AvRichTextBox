@@ -63,15 +63,22 @@ public class TextRange : INotifyPropertyChanged, IDisposable
 
       foreach (IEditable ied in startPar!.Inlines) ied.IsStartInline = false;
 
-      IEditable startInline = null!;
+      IEditable? startInline = null;
       if (BiasForward)
          startInline = startPar.Inlines.LastOrDefault(ied => startPar.StartInDoc + ied.TextPositionOfInlineInParagraph <= Start)!;
       else
       {
          if (Start - startPar.StartInDoc == 0)
-            startInline = startPar.Inlines.FirstOrDefault()!;
+            startInline = startPar.Inlines.FirstOrDefault();
          else
             startInline = startPar.Inlines.LastOrDefault(ied => startPar.StartInDoc + ied.TextPositionOfInlineInParagraph < Start)!;
+      }
+
+      // If the inline is empty, create it.
+      if (startInline == null)
+      {
+          startInline = new EditableRun("");
+          startPar.Inlines.Add(startInline);
       }
 
 #if DEBUG

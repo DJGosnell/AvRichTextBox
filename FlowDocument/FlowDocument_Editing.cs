@@ -15,6 +15,9 @@ public partial class FlowDocument
    {
       IEditable startInline = Selection.GetStartInline();
 
+      if (startInline == null)
+          return;
+
       if (startInline.GetType() == typeof(EditableInlineUIContainer))
          return;
 

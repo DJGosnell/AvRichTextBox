@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data.Core;
 using Avalonia.Input;
@@ -41,7 +41,11 @@ public partial class RichTextBox
       
 
       TextHitTestResult hitCarIndex = currentMouseOverEP.TextLayout.HitTestPoint(e.GetPosition(currentMouseOverEP));
-      Paragraph thisPar = (Paragraph)currentMouseOverEP.DataContext!;
+      Paragraph? thisPar = currentMouseOverEP.DataContext as Paragraph;
+
+      if (thisPar == null)
+          return;
+
       SelectionOrigin = thisPar.StartInDoc + hitCarIndex.TextPosition;
       FlowDoc.Selection.Start = SelectionOrigin;
 
