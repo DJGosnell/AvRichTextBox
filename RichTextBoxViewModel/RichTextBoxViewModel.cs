@@ -33,7 +33,7 @@ public class RichTextBoxViewModel : INotifyPropertyChanged
       hPar.Inlines.Add(new EditableRun(""));
 
 #if DEBUG
-      RunDebuggerVisible = true;
+      RunDebuggerVisible = false;
 #endif
    
    }

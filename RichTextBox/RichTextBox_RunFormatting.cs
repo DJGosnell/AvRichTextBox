@@ -25,7 +25,8 @@ public partial class RichTextBox
 
    private void CopyToClipboard()
    {
-      TopLevel.GetTopLevel(this)!.Clipboard!.SetTextAsync(FlowDoc.Selection.GetText());
+       var clipboard = TopLevel.GetTopLevel(this)!.Clipboard!;
+       clipboard.SetTextAsync(FlowDoc.Selection.GetText());
          
 
    }
